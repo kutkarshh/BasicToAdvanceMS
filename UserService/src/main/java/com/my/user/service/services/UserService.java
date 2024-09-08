@@ -11,6 +11,9 @@ public interface UserService {
     // Create User
     User createUser(User user);
 
+    // Create Multiple Users
+    List<User> createMultipleUsers(List<User> users);
+
     // Update User
     User updateUser(User user);
 
