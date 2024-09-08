@@ -18,10 +18,10 @@ public interface UserService {
     User updateUser(User user);
 
     // Delete User
-    void deleteUser(Long userId);
+    void deleteUser(String userId);
 
     // Get User
-    User getUser(Long userId);
+    User getUser(String userId);
 
     // Get All Users
     List<User> getAllUsers();

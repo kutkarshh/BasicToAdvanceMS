@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,10 +39,17 @@ public class UserController {
     }
 
     // Update User
+
+    @PutMapping("/update")
+    public ResponseEntity<User> updateUser(@RequestBody User user) {
+        User updatedUser = userServiceImpl.updateUser(user);
+        return ResponseEntity.ok(updatedUser);
+    }
+
     // Delete User
     // Get User
     @GetMapping("/{userId}")
-    public ResponseEntity<User> getSingleUser(@PathVariable Long userId) {
+    public ResponseEntity<User> getSingleUser(@PathVariable String userId) {
         User user = userServiceImpl.getUser(userId);
         return ResponseEntity.ok(user);
     }
