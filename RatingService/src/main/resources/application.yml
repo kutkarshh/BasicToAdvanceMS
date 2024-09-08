@@ -1,0 +1,8 @@
+server:
+  port: 8083
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://kutkarshh:hello12345@mycluster.9v9fvud.mongodb.net/
+      database: microservices
