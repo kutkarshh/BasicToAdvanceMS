@@ -19,9 +19,12 @@ spring:
     show-sql: true
 
 
+# Eureka Client Configuration
 eureka:
   instance:
     prefer-ip-address: true
+    appname: USER-SERVICE
+
   client:
     fetch-registry: true
     register-with-eureka: true

@@ -6,3 +6,15 @@ spring:
     mongodb:
       uri: mongodb+srv://kutkarshh:hello12345@mycluster.9v9fvud.mongodb.net/
       database: microservices
+  application:
+    name: RATING-SERVICE
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    appname: RATING-SERVICE
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka

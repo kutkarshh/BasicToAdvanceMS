@@ -50,6 +50,7 @@ public class UserController {
     // Get User
     @GetMapping("/{userId}")
     public ResponseEntity<User> getSingleUser(@PathVariable String userId) {
+        // Get User by Id from the Database using User Repository
         User user = userServiceImpl.getUser(userId);
         return ResponseEntity.ok(user);
     }
