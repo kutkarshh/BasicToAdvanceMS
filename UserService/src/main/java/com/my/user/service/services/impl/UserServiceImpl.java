@@ -6,7 +6,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -15,6 +14,7 @@ import com.my.user.service.entities.Hotel;
 import com.my.user.service.entities.Rating;
 import com.my.user.service.entities.User;
 import com.my.user.service.exceptions.ResourceNotFoundException;
+import com.my.user.service.external.services.HotelService;
 import com.my.user.service.repositories.UserRepository;
 import com.my.user.service.services.UserService;
 
@@ -29,6 +29,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private HotelService hotelService;
 
     @Override
     public User createUser(User user) {
@@ -106,9 +109,14 @@ public class UserServiceImpl implements UserService {
      */
     private Rating fetchHotelDetailsForRating(Rating rating) {
         try {
-            String hotelUrl = "http://HOTEL-SERVICE/hotels/" + rating.getHotelId();
-            ResponseEntity<Hotel> hotelData = restTemplate.getForEntity(hotelUrl, Hotel.class);
-            Hotel hotel = hotelData.getBody();
+            // Fetch hotel details from HOTEL-SERVICE using RestTemplate
+            // String hotelUrl = "http://HOTEL-SERVICE/hotels/" + rating.getHotelId();
+            // ResponseEntity<Hotel> hotelData = restTemplate.getForEntity(hotelUrl,
+            // Hotel.class);
+
+            /* Using Feign Client -- > calling Hotel Service API to fetch hotel details */
+
+            Hotel hotel = hotelService.getHotelById(rating.getHotelId());
             rating.setHotel(hotel);
         } catch (RestClientException e) {
             log.error("Error while fetching hotel details for hotelId: {}", rating.getHotelId(), e);
